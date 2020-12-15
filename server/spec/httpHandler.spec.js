@@ -23,6 +23,16 @@ describe('server responses', () => {
 
   it('should respond to a GET request for a swim command', (done) => {
     // write your test here
+    let {req, res} = server.mock('/', 'GET');
+
+    httpHandler.router(req, res);
+    expect(res._responseCode).to.equal(200);
+    expect(res._ended).to.equal(true);
+    var potentialResults = ['up', 'down', 'left', 'right'];
+    let data = res._data;
+    let present = potentialResults.indexOf(data);
+    expect()
+    // array of all options- see if data is present in array
     done();
   });
 
