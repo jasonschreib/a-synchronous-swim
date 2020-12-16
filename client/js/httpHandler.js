@@ -5,6 +5,26 @@
   //
   // TODO: build the swim command fetcher here
   //
+  const ajaxKeyPress = () => {
+    $.ajax({
+      type: 'GET',
+      // data: key,
+      url: serverUrl,
+      // cache: false,
+      // contentType: false,
+      // processData: false,
+      success: () => {
+        // reload the page
+        // call swimTeamMove
+        console.log('worked');
+      },
+      failure: (err) => {
+        console.log(err);
+      }
+    });
+  };
+
+  ajaxKeyPress();
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -17,7 +37,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,

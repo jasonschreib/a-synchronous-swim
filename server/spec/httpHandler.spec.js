@@ -28,11 +28,12 @@ describe('server responses', () => {
     httpHandler.router(req, res);
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
+
     var potentialResults = ['up', 'down', 'left', 'right'];
     let data = res._data;
     let present = potentialResults.indexOf(data);
-    expect()
-    // array of all options- see if data is present in array
+    expect(present).to.not.equal(-1);
+
     done();
   });
 
