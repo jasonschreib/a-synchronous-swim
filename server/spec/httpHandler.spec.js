@@ -30,7 +30,7 @@ describe('server responses', () => {
     expect(res._ended).to.equal(true);
 
     var potentialResults = ['up', 'down', 'left', 'right'];
-    let data = res._data;
+    let data = res.randomMove;
     let present = potentialResults.indexOf(data);
     expect(present).to.not.equal(-1);
 

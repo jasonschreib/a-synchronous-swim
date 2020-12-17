@@ -1,4 +1,4 @@
-(function() {
+// (function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
 
@@ -8,22 +8,15 @@
   const ajaxKeyPress = () => {
     $.ajax({
       type: 'GET',
-      // data: key,
       url: serverUrl,
-      // cache: false,
-      // contentType: false,
-      // processData: false,
-      success: () => {
-        // reload the page
-        // call swimTeamMove
-        console.log('worked');
+      success: (data) => {
+        console.log(data);
       },
       failure: (err) => {
         console.log(err);
       }
     });
   };
-
   ajaxKeyPress();
 
   /////////////////////////////////////////////////////////////////////
@@ -66,4 +59,4 @@
     ajaxFileUplaod(file);
   });
 
-})();
+// })();
