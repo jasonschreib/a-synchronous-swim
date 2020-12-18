@@ -5,19 +5,25 @@
   //
   // TODO: build the swim command fetcher here
   //
-  const ajaxKeyPress = () => {
+  const ajaxKeyPress = (cb) => {
     $.ajax({
       type: 'GET',
       url: serverUrl,
       success: (data) => {
         console.log(data);
+        cb(data);
       },
-      failure: (err) => {
+      error: (err) => {
         console.log(err);
       }
     });
   };
-  ajaxKeyPress();
+  // ajaxKeyPress();
+
+  // setInterval(function() {
+  //   console.log(SwimTeam.move);
+  //   ajaxKeyPress(SwimTeam.move);
+  // }, 10000);
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
