@@ -1,7 +1,7 @@
 module.exports.messages = []; // the storage usnit for messages
 
 module.exports.enqueue = (message) => {
-  console.log(`Enqueing message: ${module.exports.message}`);
+  console.log(`Enqueing message: ${message}`);
   module.exports.messages.push(message);
   console.log('MESSAGE QUEUE FILE', module.exports.messages);
 };

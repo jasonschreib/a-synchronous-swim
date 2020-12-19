@@ -20,10 +20,10 @@
   };
   // ajaxKeyPress();
 
-  // setInterval(function() {
-  //   console.log(SwimTeam.move);
-  //   ajaxKeyPress(SwimTeam.move);
-  // }, 10000);
+  setInterval(function() {
+    console.log(SwimTeam.move);
+    ajaxKeyPress(SwimTeam.move);
+  }, 10000);
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!

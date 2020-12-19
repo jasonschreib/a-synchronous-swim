@@ -46,10 +46,11 @@ module.exports.initialize = (callback) => {
     if (key && (key.name === 'return' || key.name === 'enter')) {
       // on enter, process the message
       logKeypress('\n');
-      if (message.length > 0) {
+      if (message.length > 0 && isValidMessage(message)) {
         callback(message);
-        message = ''; // clear the buffer where we are collecting keystrokes
       }
+       // clear the buffer where we are collecting keystrokes
+      message = '';
     } else {
       // collect the individual characters/keystrokes
       message += (mappedChars[key.name] || key.name);
