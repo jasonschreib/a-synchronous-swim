@@ -22,15 +22,11 @@ module.exports.router = (req, res, next = ()=>{}) => {
   if (req.method === 'GET') {
 
     let move = messages.dequeue();
-    // console.log('should be string move: ' + move);
 
     res.writeHead(200, headers);
 
-    // var allMoves = ['up', 'down', 'left', 'right'];
-    // var randMove = Math.floor(Math.random() * allMoves.length);
-    // var capturedMove = allMoves[randMove];
-
     res.move = move;
+
     res.end(move);
     next();
 
@@ -38,6 +34,6 @@ module.exports.router = (req, res, next = ()=>{}) => {
 
     res.writeHead(200, headers);
     res.end();
-    next(); // invoke next() at the end of a request to help with testing!
+    next(); // invoke next() help with testing!
   }
 };

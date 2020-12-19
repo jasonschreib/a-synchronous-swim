@@ -30,16 +30,16 @@ describe('server responses', () => {
     expect(res._ended).to.equal(true);
 
     var potentialResults = ['up', 'down', 'left', 'right'];
-    let data = res.randomMove;
+    let data = res.move;
     let present = potentialResults.indexOf(data);
     expect(present).to.not.equal(-1);
 
     done();
   });
 
-  xit('should respond with 404 to a GET request for a missing background image', (done) => {
+  it('should respond with 404 to a GET request for a missing background image', (done) => {
     httpHandler.backgroundImageFile = path.join('.', 'spec', 'missing.jpg');
-    let {req, res} = server.mock('FILL_ME_IN', 'GET');
+    let {req, res} = server.mock('/', 'GET');
 
     httpHandler.router(req, res, () => {
       expect(res._responseCode).to.equal(404);
@@ -48,9 +48,16 @@ describe('server responses', () => {
     });
   });
 
-  xit('should respond with 200 to a GET request for a present background image', (done) => {
+  it('should respond with 200 to a GET request for a present background image', (done) => {
     // write your test here
-    done();
+    httpHandler.backgroundImageFile = path.join('.', 'spec', 'water-lg.jpg');
+    let {req, res} = server.mock('/', 'GET');
+
+    httpHandler.router(req, res, () => {
+      expect(res._responseCode).to.equal(200);
+      expect(res._ended).to.equal(true);
+      done();
+    });
   });
 
   var postTestFile = path.join('.', 'spec', 'water-lg.jpg');
