@@ -6,13 +6,12 @@ const http = require('http');
 const messages = require('./messageQueue');
 
 // Path for the background image ///////////////////////
-module.exports.backgroundImageFile = path.join('.', 'background.jpg');
+module.exports.backgroundImageFile = path.join('/', 'background.jpg');
 ////////////////////////////////////////////////////////
 
 // let messageQueue = null;
 // module.exports.initialize = (queue, dequeue) => {
 //   messageQueue = queue;
-//   let move = dequeue();
 //   console.log('httpHANDLER FILE', messageQueue);
 // };
 
@@ -21,14 +20,40 @@ module.exports.router = (req, res, next = ()=>{}) => {
 
   if (req.method === 'GET') {
 
-    let move = messages.dequeue();
+    let data = {}
 
-    res.writeHead(200, headers);
+    if (req.url === '/') {
+      let move = messages.dequeue();
+      data.move = move;
 
-    res.move = move;
+      res.move = move;
 
-    res.end(move);
-    next();
+      res.writeHead(200, headers);
+      res.end(data.move);
+      next();
+    }
+
+    if (req.url === '/background.jpg') {
+      let imageData = fs.readFileSync(__dirname + module.exports.backgroundImageFile, 'utf8');
+
+      // let imageData = stream.on('data', function(chunk) {
+      //   return chunk;
+      // });
+
+      console.log('IMAGE DATA:', imageData);
+
+      if (imageData) {
+        data.image = imageData;
+        res.writeHead(200, headers);
+        res.end(data.imageData);
+        next();
+
+      } else {
+        res.writeHead(404, headers);
+        res.end();
+        next();
+      }
+    }
 
   } else {
 

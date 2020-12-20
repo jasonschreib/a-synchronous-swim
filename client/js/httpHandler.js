@@ -1,14 +1,15 @@
 // (function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
+  const imageUrl = 'http://127.0.0.1:3000/background.jpg';
 
   //
   // TODO: build the swim command fetcher here
   //
-  const ajaxKeyPress = (cb) => {
+  const ajaxKeyPress = (cb = () => {}) => {
     $.ajax({
       type: 'GET',
-      url: serverUrl,
+      url: imageUrl,
       success: (data) => {
         console.log(data);
         cb(data);
@@ -18,12 +19,13 @@
       }
     });
   };
-  // ajaxKeyPress();
 
-  setInterval(function() {
-    console.log(SwimTeam.move);
-    ajaxKeyPress(SwimTeam.move);
-  }, 10000);
+  ajaxKeyPress();
+
+  // setInterval(function() {
+  //   console.log(SwimTeam.move);
+  //   ajaxKeyPress(SwimTeam.move);
+  // }, 3000);
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!

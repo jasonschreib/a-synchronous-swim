@@ -10,7 +10,6 @@ server.listen(port, ip);
 
 keypressHandler.initialize(message => {
   messageQueue.enqueue(message);
-  // httpHandler.initialize(messageQueue.messages, messageQueue.dequeue);
 });
 
 console.log('Server is running in the terminal!');
