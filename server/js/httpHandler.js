@@ -18,6 +18,12 @@ module.exports.backgroundImageFile = path.join('/', 'background.jpg');
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
 
+  if (req.method === 'OPTIONS') {
+    res.writeHead(200, headers);
+    res.end();
+    next(); // invoke next() help with testing!
+  }
+
   if (req.method === 'GET') {
 
     let data = {}
@@ -34,31 +40,34 @@ module.exports.router = (req, res, next = ()=>{}) => {
     }
 
     if (req.url === '/background.jpg') {
-      let imageData = fs.readFileSync(__dirname + module.exports.backgroundImageFile, 'utf8');
-
-      // let imageData = stream.on('data', function(chunk) {
-      //   return chunk;
-      // });
-
-      console.log('IMAGE DATA:', imageData);
-
-      if (imageData) {
-        data.image = imageData;
-        res.writeHead(200, headers);
-        res.end(data.imageData);
-        next();
-
-      } else {
-        res.writeHead(404, headers);
+      let imageData = fs.readFile(module.exports.backgroundImageFile, (err, data) =>
+      {
+        if (err) {
+          res.writeHead(404, headers);
+        } else {
+          res.writeHead(200, headers);
+          res.end(data);
+        }
         res.end();
         next();
-      }
+      });
     }
 
-  } else {
+  }
 
-    res.writeHead(200, headers);
-    res.end();
-    next(); // invoke next() help with testing!
+  if (req.method === 'POST' && req.url === '/background.jpg') {
+    var fileData = Buffer.alloc(0);
+
+    req.on('data', (chunk) => {
+      fileData = Buffer.concat([fileData, chunk]);
+    });
+    req.on('end', () => {
+      var file = multipart.getFile(fileData);
+      fs.writeFile(module.exports.backgroundImageFile, file.data, (err) => {
+        res.writeHead(err ? 400 : 201, headers);
+        res.end();
+        next();
+      })
+    })
   }
 };

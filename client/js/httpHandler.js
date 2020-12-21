@@ -9,7 +9,7 @@
   const ajaxKeyPress = (cb = () => {}) => {
     $.ajax({
       type: 'GET',
-      url: imageUrl,
+      url: serverUrl,
       success: (data) => {
         console.log(data);
         cb(data);
@@ -38,7 +38,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: serverUrl,
+      url: /background.jpg,
       cache: false,
       contentType: false,
       processData: false,
