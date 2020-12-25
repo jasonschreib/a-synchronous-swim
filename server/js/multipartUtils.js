@@ -14,7 +14,7 @@ module.exports.parse = function(buffer) {
 module.exports.getFile = function(buffer) {
   var parts = module.exports.parse(buffer);
   for (var part of parts) {
-    // return first part with filename and data keys
+    // return first part with filename and data key
     if (part.filename && part.data) {
       return part;
     }
